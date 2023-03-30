@@ -32,13 +32,21 @@ btnClear.addEventListener("click", function(event){
     txtNombre.value = "";
     txtNumber.value = "";
     cuerpoTabla[0].innerHTML = "";
+
     contador = 0;
     totalEnProductos = 0;
     costoTotal = 0;
+    
     contadorProductos.innerText = "0";
     productosTotal.innerText = "0";
     precioTotal.innerText = "$ 0";
+
+    localStorage.setItem("contadorProductos", contador);
+    localStorage.setItem("totalEnProductos", totalEnProductos);
+    localStorage.setItem("costoTotal", costoTotal.toFixed(2));
     });
+
+
 
 
     // FUNCION validar cantidad
@@ -107,7 +115,7 @@ btnAgregar.addEventListener("click", function(event){
 
     idTimeout=setTimeout(function(){                   //---Toda esta función setTimeout permite que el mensaje de error desaparezca en un tiempo establecido---
     alertValidaciones.style.display = "none";          //---La función que se va a ocultar---
-}, 3000)                                               //---El tiempo asignado en milisegundos---
+    }, 3000)                                               //---El tiempo asignado en milisegundos---
     if (isValid){                                       
     precio = getPrecio();                              //---Asigna el precio aleatorio---
     contador++;                         
@@ -124,11 +132,14 @@ btnAgregar.addEventListener("click", function(event){
     productosTotal.innerText=totalEnProductos;
     costoTotal += precio * parseFloat(txtNumber.value);     //---Multiplica el precio por el número de productos de todos los productos en la lista gracias al (+=)---
     precioTotal.innerText = `$ ${costoTotal.toFixed(2)}`;   //---Esto escribe en el campo correspondiente el precio total redondeado a 2 decimales---
+    localStorage.setItem("contadorProductos", contador);
+    localStorage.setItem("totalEnProductos", totalEnProductos);
+    localStorage.setItem("costoTotal", costoTotal.toFixed(2));
     txtNombre.value="";
     txtNumber.value="";
     txtNombre.focus();
-
-}});
+    }
+});
 
 //---Estos dos parrafos a continuación sirven para eliminar espacios vacios al inicio o al final de los campos en caunto sales de ellos, asi evitar errores y poder validar correctamente---
 txtNombre.addEventListener("blur",function(event){
@@ -140,5 +151,3 @@ txtNumber.addEventListener("blur",function(event){
     event.preventDefault();
     txtNumber.value = txtNumber.value.trim();
 }); // txtNumber BLUR
-
-
