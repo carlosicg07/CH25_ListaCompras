@@ -151,3 +151,23 @@ txtNumber.addEventListener("blur",function(event){
     event.preventDefault();
     txtNumber.value = txtNumber.value.trim();
 }); // txtNumber BLUR
+
+window.addEventListener("load", function(event){                            //---Esto es para que al cargar la pagina de nuevo ejecute la acción que escribo abajo---
+    if(localStorage.getItem("contadorProductos")==null){                    //---Este if hace que si no hay valor en el storage de contadorProductos se muestre un 0---
+        localStorage.setItem("contadorProductos", "0");                   
+    }    
+    if(localStorage.getItem("totalEnProductos")==null){                    //---Este if hace que si no hay valor en el storage de totalEnProductos se muestre un 0---
+        localStorage.setItem("totalEnProductos", "0");
+    }   
+    if(localStorage.getItem("costoTotal")==null){                          //---Este if hace que si no hay valor en el storage de costoTotal se muestre un 0---
+        localStorage.setItem("costoTotal", "0.0");
+    }                       
+
+    contador = parseInt(localStorage.getItem("contadorProductos"));         //---Trae los datos almacenados en el local storage (contadorProductos, totalEnProductos, costoTotal)---
+    totalEnProductos = parseInt(localStorage.getItem("totalEnProductos"));
+    costoTotal = parseFloat(localStorage.getItem("costoTotal"));
+    
+    contadorProductos.innerText = contador;                                 //---Muestra los valores almacenados (lo de arriba) en los campos asignados (lo de abajo)---
+    productosTotal.innerText = totalEnProductos;
+    precioTotal.innerText = `$ ${costoTotal}`;
+});
